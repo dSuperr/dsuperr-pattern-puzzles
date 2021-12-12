@@ -8,18 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		5253556D2766538D00194E3B /* Pattern_PuzzlesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5253556C2766538D00194E3B /* Pattern_PuzzlesApp.swift */; };
-		5253556F2766538D00194E3B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5253556E2766538D00194E3B /* ContentView.swift */; };
+		5253556F2766538D00194E3B /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5253556E2766538D00194E3B /* AppView.swift */; };
 		525355712766539100194E3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525355702766539100194E3B /* Assets.xcassets */; };
 		525355742766539100194E3B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525355732766539100194E3B /* Preview Assets.xcassets */; };
+		5253557C276653BD00194E3B /* QuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5253557B276653BD00194E3B /* QuestionViewModel.swift */; };
+		5253557E276653FE00194E3B /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5253557D276653FE00194E3B /* QuestionModel.swift */; };
+		525355802766541200194E3B /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5253557F2766541200194E3B /* Parser.swift */; };
+		525355832766554800194E3B /* App1_json.json in Resources */ = {isa = PBXBuildFile; fileRef = 525355822766554800194E3B /* App1_json.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		525355692766538D00194E3B /* Pattern_Puzzles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pattern_Puzzles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5253556C2766538D00194E3B /* Pattern_PuzzlesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern_PuzzlesApp.swift; sourceTree = "<group>"; };
-		5253556E2766538D00194E3B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5253556E2766538D00194E3B /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		525355702766539100194E3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		525355732766539100194E3B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		525355752766539100194E3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5253557B276653BD00194E3B /* QuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewModel.swift; sourceTree = "<group>"; };
+		5253557D276653FE00194E3B /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
+		5253557F2766541200194E3B /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		525355822766554800194E3B /* App1_json.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = App1_json.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +61,11 @@
 			isa = PBXGroup;
 			children = (
 				5253556C2766538D00194E3B /* Pattern_PuzzlesApp.swift */,
-				5253556E2766538D00194E3B /* ContentView.swift */,
+				5253556E2766538D00194E3B /* AppView.swift */,
+				5253557B276653BD00194E3B /* QuestionViewModel.swift */,
+				5253557D276653FE00194E3B /* QuestionModel.swift */,
+				5253557F2766541200194E3B /* Parser.swift */,
+				52535581276654DF00194E3B /* Resources */,
 				525355702766539100194E3B /* Assets.xcassets */,
 				525355752766539100194E3B /* Info.plist */,
 				525355722766539100194E3B /* Preview Content */,
@@ -67,6 +79,14 @@
 				525355732766539100194E3B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		52535581276654DF00194E3B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				525355822766554800194E3B /* App1_json.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +146,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525355832766554800194E3B /* App1_json.json in Resources */,
 				525355742766539100194E3B /* Preview Assets.xcassets in Resources */,
 				525355712766539100194E3B /* Assets.xcassets in Resources */,
 			);
@@ -138,8 +159,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5253556F2766538D00194E3B /* ContentView.swift in Sources */,
+				5253556F2766538D00194E3B /* AppView.swift in Sources */,
+				5253557C276653BD00194E3B /* QuestionViewModel.swift in Sources */,
+				525355802766541200194E3B /* Parser.swift in Sources */,
 				5253556D2766538D00194E3B /* Pattern_PuzzlesApp.swift in Sources */,
+				5253557E276653FE00194E3B /* QuestionModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
