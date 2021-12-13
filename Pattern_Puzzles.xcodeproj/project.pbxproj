@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		5253557E276653FE00194E3B /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5253557D276653FE00194E3B /* QuestionModel.swift */; };
 		525355802766541200194E3B /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5253557F2766541200194E3B /* Parser.swift */; };
 		525355832766554800194E3B /* App1_json.json in Resources */ = {isa = PBXBuildFile; fileRef = 525355822766554800194E3B /* App1_json.json */; };
+		528998EB27665B8900AD3EA4 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528998EA27665B8900AD3EA4 /* BannerView.swift */; };
 		D32C2C513739FC946798EAD8 /* Pods_Pattern_Puzzles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9413FE4ED33BFB69CA9B18 /* Pods_Pattern_Puzzles.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		5253557D276653FE00194E3B /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
 		5253557F2766541200194E3B /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		525355822766554800194E3B /* App1_json.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = App1_json.json; sourceTree = "<group>"; };
+		528998EA27665B8900AD3EA4 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		7A9413FE4ED33BFB69CA9B18 /* Pods_Pattern_Puzzles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pattern_Puzzles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E3A1E5B97D80D1353F0D0CF /* Pods-Pattern_Puzzles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pattern_Puzzles.release.xcconfig"; path = "Target Support Files/Pods-Pattern_Puzzles/Pods-Pattern_Puzzles.release.xcconfig"; sourceTree = "<group>"; };
 		D14EE0DD4FC5A466B051D7E8 /* Pods-Pattern_Puzzles.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pattern_Puzzles.debug.xcconfig"; path = "Target Support Files/Pods-Pattern_Puzzles/Pods-Pattern_Puzzles.debug.xcconfig"; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				5253556C2766538D00194E3B /* Pattern_PuzzlesApp.swift */,
 				5253556E2766538D00194E3B /* AppView.swift */,
 				5253557B276653BD00194E3B /* QuestionViewModel.swift */,
+				528998E927665B6100AD3EA4 /* AdViews */,
 				5253557D276653FE00194E3B /* QuestionModel.swift */,
 				5253557F2766541200194E3B /* Parser.swift */,
 				52535581276654DF00194E3B /* Resources */,
@@ -104,13 +107,20 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		528998E927665B6100AD3EA4 /* AdViews */ = {
+			isa = PBXGroup;
+			children = (
+				528998EA27665B8900AD3EA4 /* BannerView.swift */,
+			);
+			path = AdViews;
+			sourceTree = "<group>";
+		};
 		83E64C02C7474726A049C075 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				D14EE0DD4FC5A466B051D7E8 /* Pods-Pattern_Puzzles.debug.xcconfig */,
 				9E3A1E5B97D80D1353F0D0CF /* Pods-Pattern_Puzzles.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -230,6 +240,7 @@
 			files = (
 				5253556F2766538D00194E3B /* AppView.swift in Sources */,
 				5253557C276653BD00194E3B /* QuestionViewModel.swift in Sources */,
+				528998EB27665B8900AD3EA4 /* BannerView.swift in Sources */,
 				525355802766541200194E3B /* Parser.swift in Sources */,
 				5253556D2766538D00194E3B /* Pattern_PuzzlesApp.swift in Sources */,
 				5253557E276653FE00194E3B /* QuestionModel.swift in Sources */,

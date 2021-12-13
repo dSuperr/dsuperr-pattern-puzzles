@@ -1,4 +1,5 @@
 import SwiftUI
+import GoogleMobileAds
 
 struct AppView: View {
     @EnvironmentObject var mQuestionViewModel: QuestionViewModel
