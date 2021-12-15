@@ -5,6 +5,13 @@ struct AppView: View {
     @EnvironmentObject var mQuestionViewModel: QuestionViewModel
     var mScreenW = UIScreen.main.bounds.size.width
     var mScreenH = UIScreen.main.bounds.size.height
+    @State var mHomeScreen_Empty_Height_1 = UIScreen.main.bounds.size.height*2/12
+    @State var mHomeScreen_App_Logo_Height = UIScreen.main.bounds.size.height*2/12
+    @State var mHomeScreen_App_Name_Height_1 = UIScreen.main.bounds.size.height/12
+    @State var mHomeScreen_App_Name_Height_2 = UIScreen.main.bounds.size.height/12
+    @State var mHomeScreen_Empty_Height_2 = UIScreen.main.bounds.size.height/12
+    @State var mHomeScreen_Play_Height = UIScreen.main.bounds.size.height*2/12
+    @State var mHomeScreen_Empty_Height_3 = UIScreen.main.bounds.size.height*3/12    
     @State var mQuestionScreen_Score_Height = UIScreen.main.bounds.size.height*2/16
     @State var mQuestionScreen_Question_Points_Height = UIScreen.main.bounds.size.height*1/16
     @State var mQuestionScreen_Text_Height = UIScreen.main.bounds.size.height*5/16
@@ -19,39 +26,43 @@ struct AppView: View {
     var body: some View {
         if (mQuestionViewModel.mScreenType == "Home") {
             ZStack {
-                Rectangle()
-                    .foregroundColor(.green)
-                    .frame(width: mScreenW, height: mScreenH)
                 VStack {
+                    Text("")
+                        .frame(height: mHomeScreen_Empty_Height_1)
                     Text("\(mQuestionViewModel.mAppName)")
                         .font(.largeTitle)
                         .bold()
+                        .frame(width: mScreenW, height: mHomeScreen_App_Logo_Height, alignment: .center)
                     Text("Pattern")
                         .font(Font.custom("AmericanTypewriter-Bold", size: mScreenH/17.5))
                         .bold()
-                        .foregroundColor(.white)
+                        .frame(width: mScreenW, height: mHomeScreen_App_Name_Height_1, alignment: .center)
                     Text("Puzzles")
                         .font(Font.custom("AmericanTypewriter-Bold", size: mScreenH/17.5))
                         .bold()
-                        .foregroundColor(.white)
+                        .frame(width: mScreenW, height: mHomeScreen_App_Name_Height_2, alignment: .center)
+                    Text("")
+                        .frame(height: mHomeScreen_Empty_Height_2)
                     Button(action: {
                         mQuestionViewModel.mQuestionScreen_Question_Number = mQuestionViewModel.getRandomQuestionNumber()
                         let lIndex = mQuestionViewModel.mQuestionScreen_Question_Number_Array.firstIndex(of: mQuestionViewModel.mQuestionScreen_Question_Number)
                         mQuestionViewModel.mQuestionScreen_Question_Number_Array.remove(at: lIndex!)
                         mQuestionViewModel.mScreenType = "Question"
-                    
                     }, label: {
                         Image(systemName: "play.circle")
                             .resizable()
-                            .foregroundColor(.white)
                             .scaledToFit()
                             .padding()
                     })
-                    .accentColor(.black)
-                    .frame(width: mScreenW/3, height: mScreenW/2, alignment: .center)
+                    .frame(height: mHomeScreen_Play_Height, alignment: .center)
+                    Text("")
+                        .frame(height: mHomeScreen_Empty_Height_3)
                 }
+                .frame(width: mScreenW, height: mScreenH)
+                .background(Color.green)
+                .foregroundColor(.white)
+                .ignoresSafeArea()
             }
-            .ignoresSafeArea()
         } else if (mQuestionViewModel.mScreenType == "Question") {
             VStack {
                 Text("Score: \(mQuestionViewModel.mQuestionScreen_Score)")
