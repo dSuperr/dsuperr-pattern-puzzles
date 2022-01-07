@@ -29,7 +29,7 @@ struct AppView: View {
                 VStack {
                     Text("")
                         .frame(height: mHomeScreen_Empty_Height_1)
-                    Text("\(mQuestionViewModel.mAppName)")
+                    Text("\(mQuestionViewModel.mAppLogo)")
                         .font(.largeTitle)
                         .bold()
                         .frame(width: mScreenW, height: mHomeScreen_App_Logo_Height, alignment: .center)

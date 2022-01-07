@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 class QuestionViewModel: ObservableObject {
-    @Published var mAppName: String = "1 Math"
+    @Published var mAppLogo: String = "1 Math"
     @Published var mScreenType = "Home"
     @Published var mQuestionModel = [QuestionModel]()
     @Published var mQuestionScreen_Score: Int = 0
