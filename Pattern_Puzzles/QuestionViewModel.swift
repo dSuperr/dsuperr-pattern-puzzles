@@ -12,7 +12,6 @@ class QuestionViewModel: ObservableObject {
     @Published var mQuestionScreen_Question_Number_Array: [Int] = []
     @Published var mQuestionScreen_Last_Correct: Bool = false
     @Published var mQuestionScreen_Result_Font_Color = Color.green
-    @Published var mQuestionScreen_Option_Clicked: Bool = false
     @Published var mQuestionScreen_Best_Score: Int = 0
     
     init() {
@@ -46,50 +45,57 @@ class QuestionViewModel: ObservableObject {
     }
 
     func checkAnswerAndUpdateScore(aOption_Number: Int) {
-        mQuestionScreen_Option_Clicked = true
         if (aOption_Number == 1) {
             if mQuestionModel[mQuestionScreen_Question_Number].Option1 == mQuestionModel[mQuestionScreen_Question_Number].Answer {
                 mQuestionScreen_Count_Correct += 1
                 mQuestionScreen_Score += Int(mQuestionModel[mQuestionScreen_Question_Number].Points)!
                 mQuestionScreen_Last_Correct = true
-                mQuestionScreen_Result_Font_Color = Color.white
+                mQuestionScreen_Result_Font_Color = Color.green
+                mScreenType = "Result"
             } else {
                 mQuestionScreen_Count_Incorrect += 1
                 mQuestionScreen_Last_Correct = false
-                mQuestionScreen_Result_Font_Color = Color.black
+                mQuestionScreen_Result_Font_Color = Color.red
+                mScreenType = "Result"
             }
         } else if (aOption_Number == 2) {
             if mQuestionModel[mQuestionScreen_Question_Number].Option2 == mQuestionModel[mQuestionScreen_Question_Number].Answer {
                 mQuestionScreen_Count_Correct += 1
                 mQuestionScreen_Score += Int(mQuestionModel[mQuestionScreen_Question_Number].Points)!
                 mQuestionScreen_Last_Correct = true
-                mQuestionScreen_Result_Font_Color = Color.white
+                mQuestionScreen_Result_Font_Color = Color.green
+                mScreenType = "Result"
             } else {
                 mQuestionScreen_Count_Incorrect += 1
                 mQuestionScreen_Last_Correct = false
-                mQuestionScreen_Result_Font_Color = Color.black
+                mQuestionScreen_Result_Font_Color = Color.red
+                mScreenType = "Result"
             }
         } else if (aOption_Number == 3) {
             if mQuestionModel[mQuestionScreen_Question_Number].Option3 == mQuestionModel[mQuestionScreen_Question_Number].Answer {
                 mQuestionScreen_Count_Correct += 1
                 mQuestionScreen_Score += Int(mQuestionModel[mQuestionScreen_Question_Number].Points)!
                 mQuestionScreen_Last_Correct = true
-                mQuestionScreen_Result_Font_Color = Color.white
+                mQuestionScreen_Result_Font_Color = Color.green
+                mScreenType = "Result"
             } else {
                 mQuestionScreen_Count_Incorrect += 1
                 mQuestionScreen_Last_Correct = false
-                mQuestionScreen_Result_Font_Color = Color.black
+                mQuestionScreen_Result_Font_Color = Color.red
+                mScreenType = "Result"
             }
         } else if (aOption_Number == 4) {
             if mQuestionModel[mQuestionScreen_Question_Number].Option4 == mQuestionModel[mQuestionScreen_Question_Number].Answer {
                 mQuestionScreen_Count_Correct += 1
                 mQuestionScreen_Score += Int(mQuestionModel[mQuestionScreen_Question_Number].Points)!
                 mQuestionScreen_Last_Correct = true
-                mQuestionScreen_Result_Font_Color = Color.white
+                mQuestionScreen_Result_Font_Color = Color.green
+                mScreenType = "Result"
             } else {
                 mQuestionScreen_Count_Incorrect += 1
                 mQuestionScreen_Last_Correct = false
-                mQuestionScreen_Result_Font_Color = Color.black
+                mQuestionScreen_Result_Font_Color = Color.red
+                mScreenType = "Result"
             }
         }
     }

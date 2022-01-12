@@ -17,12 +17,14 @@ struct AppView: View {
     @State var mQuestionScreen_Text_Height = UIScreen.main.bounds.size.height*5/16
     @State var mQuestionScreen_Option_Height = UIScreen.main.bounds.size.height*3/16
     @State var mQuestionScreen_Result_Height = UIScreen.main.bounds.size.height*2/16
-    @State var mResultScreen_Empty_Height_1 = UIScreen.main.bounds.size.height*1/12
-    @State var mResultScreen_Game_Over_Height = UIScreen.main.bounds.size.height*3/12
-    @State var mResultScreen_Score_Height = UIScreen.main.bounds.size.height/12
-    @State var mResultScreen_Best_Score_Height = UIScreen.main.bounds.size.height/12
-    @State var mResultScreen_Try_Again_Height = UIScreen.main.bounds.size.height*3/12
-    @State var mResultScreen_Empty_Height_2 = UIScreen.main.bounds.size.height*3/12
+    @State var mResultScreen_Symbol_Height = UIScreen.main.bounds.size.height*8/9
+    @State var mResultScreen_Next_Button_Height = UIScreen.main.bounds.size.height*1/9
+    @State var mStatsScreen_Empty_Height_1 = UIScreen.main.bounds.size.height*1/12
+    @State var mStatsScreen_Game_Over_Height = UIScreen.main.bounds.size.height*3/12
+    @State var mStatsScreen_Score_Height = UIScreen.main.bounds.size.height/12
+    @State var mStatsScreen_Best_Score_Height = UIScreen.main.bounds.size.height/12
+    @State var mStatsScreen_Try_Again_Height = UIScreen.main.bounds.size.height*3/12
+    @State var mStatsScreen_Empty_Height_2 = UIScreen.main.bounds.size.height*3/12
     var body: some View {
         if (mQuestionViewModel.mScreenType == "Home") {
             ZStack {
@@ -91,7 +93,6 @@ struct AppView: View {
                     })
                     .frame(maxWidth: .infinity)
                     .frame(height: mQuestionScreen_Option_Height, alignment: .center)
-                    .disabled(mQuestionViewModel.mQuestionScreen_Option_Clicked)
                     Button(action: {
                         mQuestionViewModel.checkAnswerAndUpdateScore(aOption_Number: 2)
                     }, label: {
@@ -102,7 +103,6 @@ struct AppView: View {
                     })
                     .frame(maxWidth: .infinity)
                     .frame(height: mQuestionScreen_Option_Height, alignment: .center)
-                    .disabled(mQuestionViewModel.mQuestionScreen_Option_Clicked)
                 }
                 .frame(height: mQuestionScreen_Option_Height)
                 HStack {
@@ -116,7 +116,6 @@ struct AppView: View {
                     })
                     .frame(maxWidth: .infinity)
                     .frame(height: mQuestionScreen_Option_Height, alignment: .center)
-                    .disabled(mQuestionViewModel.mQuestionScreen_Option_Clicked)
                     Button(action: {
                         mQuestionViewModel.checkAnswerAndUpdateScore(aOption_Number: 4)
                     }, label: {
@@ -127,12 +126,10 @@ struct AppView: View {
                     })
                     .frame(maxWidth: .infinity)
                     .frame(height: mQuestionScreen_Option_Height, alignment: .center)
-                    .disabled(mQuestionViewModel.mQuestionScreen_Option_Clicked)
                 }
                 .frame(height: mQuestionScreen_Option_Height)
                 HStack {
                     Button(action: {
-                        mQuestionViewModel.mQuestionScreen_Option_Clicked = false
                         mQuestionViewModel.mQuestionScreen_Question_Number = mQuestionViewModel.getRandomQuestionNumber()
                         mQuestionViewModel.mQuestionScreen_Result_Font_Color = Color.green
                         if (mQuestionViewModel.mQuestionScreen_Question_Number != -1) {
@@ -140,98 +137,92 @@ struct AppView: View {
                             mQuestionViewModel.mQuestionScreen_Question_Number_Array.remove(at: lIndex!)
                         } else {
                             mQuestionViewModel.setBestScore()
-                            mQuestionViewModel.mScreenType = "Result"
+                            mQuestionViewModel.mScreenType = "Stats"
                         }
                     }, label: {
-                        if (mQuestionViewModel.mQuestionScreen_Option_Clicked == false) {
                             Text("Skip")
                                 .font(.title3)
                                 .bold()
-                        }
+                        
                     })
                     .background(Color.green)
                     .padding(.bottom, mQuestionScreen_Result_Height/4)
                     .frame(maxWidth: .infinity)
                     .frame(height: mQuestionScreen_Result_Height, alignment: .center)
                     .accentColor(.white)
-                    .disabled(mQuestionViewModel.mQuestionScreen_Option_Clicked)
                     Button(action: {
                         //TODO
                     }, label: {
-                        if (mQuestionViewModel.mQuestionScreen_Last_Correct == true){
-                            Image(systemName: "checkmark")
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundColor(mQuestionViewModel.mQuestionScreen_Result_Font_Color)
-                                .frame(height: mQuestionScreen_Result_Height/2, alignment: .center)
-                        } else {
-                            Image(systemName: "xmark")
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundColor(mQuestionViewModel.mQuestionScreen_Result_Font_Color)
-                                .frame(height: mQuestionScreen_Result_Height/2, alignment: .center)
-                        }
                     })
                     .padding(.bottom, mQuestionScreen_Result_Height/3)
                     .frame(maxWidth: .infinity)
-                    .frame(height: mQuestionScreen_Result_Height, alignment: .center)
+                    .frame(height: mQuestionScreen_Option_Height, alignment: .center)
                     Button(action: {
-                        mQuestionViewModel.mQuestionScreen_Option_Clicked = false
-                        mQuestionViewModel.mQuestionScreen_Question_Number = mQuestionViewModel.getRandomQuestionNumber()
-                        mQuestionViewModel.mQuestionScreen_Result_Font_Color = Color.green
-                        if (mQuestionViewModel.mQuestionScreen_Question_Number != -1) && mQuestionViewModel.mQuestionScreen_Last_Correct == false {
-                            mQuestionViewModel.setBestScore()
-                            mQuestionViewModel.mScreenType = "Result"
-                        } else if (mQuestionViewModel.mQuestionScreen_Question_Number != -1) {
-                            let lIndex = mQuestionViewModel.mQuestionScreen_Question_Number_Array.firstIndex(of: mQuestionViewModel.mQuestionScreen_Question_Number)
-                            mQuestionViewModel.mQuestionScreen_Question_Number_Array.remove(at: lIndex!)
-                        } else {
-                            mQuestionViewModel.setBestScore()
-                            mQuestionViewModel.mScreenType = "Result"
-                        }
+                        //TODO
                     }, label: {
-                        if mQuestionViewModel.mQuestionScreen_Option_Clicked && (mQuestionViewModel.mQuestionScreen_Last_Correct == true) {
-                            Text("Next")
-                                .font(.title3)
-                                .bold()
-                        } else if mQuestionViewModel.mQuestionScreen_Option_Clicked {
-                            Text("Results")
-                                .font(.title3)
-                                .bold()
-                        }
                     })
                     .background(Color.green)
-                    .padding(.bottom, mQuestionScreen_Result_Height/3)
                     .frame(maxWidth: .infinity)
-                    .frame(height: mQuestionScreen_Result_Height, alignment: .center)
-                    .accentColor(.white)
-                    .disabled((mQuestionViewModel.mQuestionScreen_Option_Clicked == false))
+                    .frame(height: mQuestionScreen_Option_Height, alignment: .center)
                 }
                 .background(Color.green)
             }
             .ignoresSafeArea()
         } else if (mQuestionViewModel.mScreenType == "Result") {
             VStack(alignment: .center) {
+                if (mQuestionViewModel.mQuestionScreen_Last_Correct == true){
+                    Image(systemName: "checkmark")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(mQuestionViewModel.mQuestionScreen_Result_Font_Color)
+                        .frame(height: mResultScreen_Symbol_Height, alignment: .center)
+                } else {
+                    Image(systemName: "xmark")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(mQuestionViewModel.mQuestionScreen_Result_Font_Color)
+                        .frame(height: mResultScreen_Symbol_Height, alignment: .center)
+                }
+                Button(action: {
+                    mQuestionViewModel.mQuestionScreen_Question_Number = mQuestionViewModel.getRandomQuestionNumber()
+                    mQuestionViewModel.mQuestionScreen_Result_Font_Color = Color.green
+                    if (mQuestionViewModel.mQuestionScreen_Question_Number == -1) || mQuestionViewModel.mQuestionScreen_Last_Correct == false {
+                        mQuestionViewModel.setBestScore()
+                        mQuestionViewModel.mScreenType = "Stats"
+                    } else {
+                        let lIndex = mQuestionViewModel.mQuestionScreen_Question_Number_Array.firstIndex(of: mQuestionViewModel.mQuestionScreen_Question_Number)
+                        mQuestionViewModel.mQuestionScreen_Question_Number_Array.remove(at: lIndex!)
+                        mQuestionViewModel.mScreenType = "Question"
+                    }
+                }, label: {
+                    Text("Next")
+                        .font(.title3)
+                        .bold()
+                })
+                .frame(height: mQuestionScreen_Result_Height, alignment: .center)
+                .accentColor(.black)
+            }
+        } else if (mQuestionViewModel.mScreenType == "Stats") {
+            VStack(alignment: .center) {
                 Text("")
-                    .frame(height: mResultScreen_Empty_Height_1)
+                    .frame(height: mStatsScreen_Empty_Height_1)
                 Text("Game Over")
                     .bold()
                     .font(.largeTitle)
-                    .frame(height: mResultScreen_Game_Over_Height)
+                    .frame(height: mStatsScreen_Game_Over_Height)
                     .frame(alignment: .bottom)
                 Text("Score: \(mQuestionViewModel.mQuestionScreen_Score)")
                     .bold()
                     .font(.title)
-                    .frame(height: mResultScreen_Score_Height)
+                    .frame(height: mStatsScreen_Score_Height)
                 Text("Best Score: \(mQuestionViewModel.mQuestionScreen_Best_Score)")
                     .bold()
                     .font(.title)
-                    .frame(height: mResultScreen_Best_Score_Height)
+                    .frame(height: mStatsScreen_Best_Score_Height)
                 Button(action: {
                     mQuestionViewModel.populateQuestionNumberArray()
                     mQuestionViewModel.mQuestionScreen_Result_Font_Color = Color.green
                     mQuestionViewModel.mQuestionScreen_Score = 0
-                    mQuestionViewModel.mQuestionScreen_Option_Clicked = false
                     mQuestionViewModel.mQuestionScreen_Question_Number = mQuestionViewModel.getRandomQuestionNumber()
                     let lIndex = mQuestionViewModel.mQuestionScreen_Question_Number_Array.firstIndex(of: mQuestionViewModel.mQuestionScreen_Question_Number)
                     mQuestionViewModel.mQuestionScreen_Question_Number_Array.remove(at: lIndex!)
@@ -244,9 +235,9 @@ struct AppView: View {
                 })
                 .accentColor(.white)
                 .background(Color.green)
-                .frame(height: mResultScreen_Try_Again_Height)
+                .frame(height: mStatsScreen_Try_Again_Height)
                 Text("")
-                    .frame(height: mResultScreen_Empty_Height_2)
+                    .frame(height: mStatsScreen_Empty_Height_2)
             }
         }
     }
