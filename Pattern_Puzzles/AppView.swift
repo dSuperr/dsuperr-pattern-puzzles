@@ -17,8 +17,9 @@ struct AppView: View {
     @State var mQuestionScreen_Text_Height = UIScreen.main.bounds.size.height*5/16
     @State var mQuestionScreen_Option_Height = UIScreen.main.bounds.size.height*3/16
     @State var mQuestionScreen_Result_Height = UIScreen.main.bounds.size.height*2/16
-    @State var mResultScreen_Symbol_Height = UIScreen.main.bounds.size.height*8/9
-    @State var mResultScreen_Next_Button_Height = UIScreen.main.bounds.size.height*1/9
+    @State var mResultScreen_Result_Height = UIScreen.main.bounds.size.height*2/9
+    @State var mResultScreen_Points_Height = UIScreen.main.bounds.size.height*2/9
+    @State var mResultScreen_Next_Button_Height = UIScreen.main.bounds.size.height*5/9
     @State var mStatsScreen_Empty_Height_1 = UIScreen.main.bounds.size.height*1/12
     @State var mStatsScreen_Game_Over_Height = UIScreen.main.bounds.size.height*3/12
     @State var mStatsScreen_Score_Height = UIScreen.main.bounds.size.height/12
@@ -170,23 +171,39 @@ struct AppView: View {
             .ignoresSafeArea()
         } else if (mQuestionViewModel.mScreenType == "Result") {
             VStack(alignment: .center) {
-                if (mQuestionViewModel.mQuestionScreen_Last_Correct == true){
-                    Image(systemName: "checkmark")
-                        .resizable()
-                        .scaledToFit()
+                if mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].Points == "100" && mQuestionViewModel.mQuestionScreen_Last_Correct {
+                    Text("Great!")
                         .foregroundColor(mQuestionViewModel.mQuestionScreen_Result_Font_Color)
-                        .frame(height: mResultScreen_Symbol_Height, alignment: .center)
+                        .font(Font.custom("Baskerville-BoldItalic", size: mScreenH/17.5))
+                        .frame(height: mResultScreen_Result_Height, alignment: .center)
+                } else if mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].Points == "200" && mQuestionViewModel.mQuestionScreen_Last_Correct {
+                    Text("Brilliant!")
+                        .foregroundColor(mQuestionViewModel.mQuestionScreen_Result_Font_Color)
+                        .bold()
+                        .font(Font.custom("Baskerville-BoldItalic", size: mScreenH/17.5))
+                        .frame(height: mResultScreen_Result_Height, alignment: .center)
+                } else if mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].Points == "400" && mQuestionViewModel.mQuestionScreen_Last_Correct {
+                    Text("Marvelous!")
+                        .foregroundColor(mQuestionViewModel.mQuestionScreen_Result_Font_Color)
+                        .bold()
+                        .font(Font.custom("Baskerville-BoldItalic", size: mScreenH/17.5))
+                        .frame(height: mResultScreen_Result_Height, alignment: .center)
                 } else {
-                    Image(systemName: "xmark")
-                        .resizable()
-                        .scaledToFit()
+                    Text("Sorry")
                         .foregroundColor(mQuestionViewModel.mQuestionScreen_Result_Font_Color)
-                        .frame(height: mResultScreen_Symbol_Height, alignment: .center)
+                        .bold()
+                        .font(Font.custom("Baskerville-BoldItalic", size: mScreenH/17.5))
+                        .frame(height: mResultScreen_Result_Height, alignment: .center)
                 }
+                Text("\(mQuestionViewModel.wrongOrRightPoints()) \(mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].Points)")
+                    .foregroundColor(mQuestionViewModel.mQuestionScreen_Result_Font_Color )
+                    .font(.largeTitle)
+                    .bold()
+                    .frame(height: mResultScreen_Points_Height, alignment: .center)
                 Button(action: {
                     mQuestionViewModel.mQuestionScreen_Question_Number = mQuestionViewModel.getRandomQuestionNumber()
                     mQuestionViewModel.mQuestionScreen_Result_Font_Color = Color.green
-                    if (mQuestionViewModel.mQuestionScreen_Question_Number == -1) || mQuestionViewModel.mQuestionScreen_Last_Correct == false {
+                    if (mQuestionViewModel.mQuestionScreen_Question_Number == -1) {
                         mQuestionViewModel.setBestScore()
                         mQuestionViewModel.mScreenType = "Stats"
                     } else {
@@ -196,7 +213,7 @@ struct AppView: View {
                     }
                 }, label: {
                     Text("Next")
-                        .font(.title3)
+                        .font(.largeTitle)
                         .bold()
                 })
                 .frame(height: mQuestionScreen_Result_Height, alignment: .center)

@@ -43,6 +43,24 @@ class QuestionViewModel: ObservableObject {
         }
         return lRetVal
     }
+    
+    func wrongOrRightPoints() -> String {
+        var lPlusOrMinus = ""
+        if mQuestionScreen_Last_Correct {
+            lPlusOrMinus = "+"
+        } else {
+            lPlusOrMinus = "-"
+        }
+        return lPlusOrMinus
+    }
+    
+    func reducePoints() {
+        if mQuestionScreen_Score > Int(mQuestionModel[mQuestionScreen_Question_Number].Points)! {
+            mQuestionScreen_Score -= Int(mQuestionModel[mQuestionScreen_Question_Number].Points)!
+        } else {
+            mQuestionScreen_Score = 0
+        }
+    }
 
     func checkAnswerAndUpdateScore(aOption_Number: Int) {
         if (aOption_Number == 1) {
@@ -57,6 +75,7 @@ class QuestionViewModel: ObservableObject {
                 mQuestionScreen_Last_Correct = false
                 mQuestionScreen_Result_Font_Color = Color.red
                 mScreenType = "Result"
+                reducePoints()
             }
         } else if (aOption_Number == 2) {
             if mQuestionModel[mQuestionScreen_Question_Number].Option2 == mQuestionModel[mQuestionScreen_Question_Number].Answer {
@@ -70,6 +89,7 @@ class QuestionViewModel: ObservableObject {
                 mQuestionScreen_Last_Correct = false
                 mQuestionScreen_Result_Font_Color = Color.red
                 mScreenType = "Result"
+                reducePoints()
             }
         } else if (aOption_Number == 3) {
             if mQuestionModel[mQuestionScreen_Question_Number].Option3 == mQuestionModel[mQuestionScreen_Question_Number].Answer {
@@ -83,6 +103,7 @@ class QuestionViewModel: ObservableObject {
                 mQuestionScreen_Last_Correct = false
                 mQuestionScreen_Result_Font_Color = Color.red
                 mScreenType = "Result"
+                reducePoints()
             }
         } else if (aOption_Number == 4) {
             if mQuestionModel[mQuestionScreen_Question_Number].Option4 == mQuestionModel[mQuestionScreen_Question_Number].Answer {
@@ -96,6 +117,7 @@ class QuestionViewModel: ObservableObject {
                 mQuestionScreen_Last_Correct = false
                 mQuestionScreen_Result_Font_Color = Color.red
                 mScreenType = "Result"
+                reducePoints()
             }
         }
     }
