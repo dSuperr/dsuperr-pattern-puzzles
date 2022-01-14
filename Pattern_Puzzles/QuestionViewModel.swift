@@ -61,6 +61,18 @@ class QuestionViewModel: ObservableObject {
             mQuestionScreen_Score = 0
         }
     }
+    
+    func getQuestionToughness() -> String {
+        var lQuestionToughness: String = ""
+        if mQuestionModel[mQuestionScreen_Question_Number].Points == "100" {
+            lQuestionToughness = "Easy"
+        } else if mQuestionModel[mQuestionScreen_Question_Number].Points == "200" {
+            lQuestionToughness = "Medium"
+        } else {
+            lQuestionToughness = "Hard"
+        }
+        return lQuestionToughness
+    }
 
     func checkAnswerAndUpdateScore(aOption_Number: Int) {
         if (aOption_Number == 1) {

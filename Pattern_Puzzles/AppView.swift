@@ -15,11 +15,12 @@ struct AppView: View {
     @State var mQuestionScreen_Score_Height = UIScreen.main.bounds.size.height*2/16
     @State var mQuestionScreen_Question_Points_Height = UIScreen.main.bounds.size.height*1/16
     @State var mQuestionScreen_Text_Height = UIScreen.main.bounds.size.height*5/16
-    @State var mQuestionScreen_Option_Height = UIScreen.main.bounds.size.height*3/16
-    @State var mQuestionScreen_Result_Height = UIScreen.main.bounds.size.height*2/16
-    @State var mResultScreen_Result_Height = UIScreen.main.bounds.size.height*2/9
-    @State var mResultScreen_Points_Height = UIScreen.main.bounds.size.height*2/9
-    @State var mResultScreen_Next_Button_Height = UIScreen.main.bounds.size.height*5/9
+    @State var mQuestionScreen_Option_Height = UIScreen.main.bounds.size.height*4/16
+    @State var mQuestionScreen_Empty_Height = UIScreen.main.bounds.size.height*1/16
+    @State var mResultScreen_Result_Height = UIScreen.main.bounds.size.height*3/12
+    @State var mResultScreen_Points_Height = UIScreen.main.bounds.size.height*3/12
+    @State var mResultScreen_Empty_Height = UIScreen.main.bounds.size.height*1/12
+    @State var mResultScreen_Next_Button_Height = UIScreen.main.bounds.size.height*5/12
     @State var mStatsScreen_Empty_Height_1 = UIScreen.main.bounds.size.height*1/12
     @State var mStatsScreen_Game_Over_Height = UIScreen.main.bounds.size.height*3/12
     @State var mStatsScreen_Score_Height = UIScreen.main.bounds.size.height/12
@@ -75,9 +76,8 @@ struct AppView: View {
                     .frame(width: mScreenW, height: mQuestionScreen_Score_Height)
                     .background(Color.green)
                     .padding(.top, mQuestionScreen_Score_Height/4)
-                Text("[Points: \(mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].Points)]")
-                    .bold()
-                    .font(.title2)
+                Text("\(mQuestionViewModel.getQuestionToughness())")
+                    .font(Font.custom("AmericanTypewriter", size: mQuestionScreen_Question_Points_Height/3))
                     .frame(height: mQuestionScreen_Question_Points_Height)
                 Text(mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].Question)
                     .bold()
@@ -129,44 +129,8 @@ struct AppView: View {
                     .frame(height: mQuestionScreen_Option_Height, alignment: .center)
                 }
                 .frame(height: mQuestionScreen_Option_Height)
-                HStack {
-                    Button(action: {
-                        mQuestionViewModel.mQuestionScreen_Question_Number = mQuestionViewModel.getRandomQuestionNumber()
-                        mQuestionViewModel.mQuestionScreen_Result_Font_Color = Color.green
-                        if (mQuestionViewModel.mQuestionScreen_Question_Number != -1) {
-                            let lIndex = mQuestionViewModel.mQuestionScreen_Question_Number_Array.firstIndex(of: mQuestionViewModel.mQuestionScreen_Question_Number)
-                            mQuestionViewModel.mQuestionScreen_Question_Number_Array.remove(at: lIndex!)
-                        } else {
-                            mQuestionViewModel.setBestScore()
-                            mQuestionViewModel.mScreenType = "Stats"
-                        }
-                    }, label: {
-                            Text("Skip")
-                                .font(.title3)
-                                .bold()
-                        
-                    })
-                    .background(Color.green)
-                    .padding(.bottom, mQuestionScreen_Result_Height/4)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: mQuestionScreen_Result_Height, alignment: .center)
-                    .accentColor(.white)
-                    Button(action: {
-                        //TODO
-                    }, label: {
-                    })
-                    .padding(.bottom, mQuestionScreen_Result_Height/3)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: mQuestionScreen_Option_Height, alignment: .center)
-                    Button(action: {
-                        //TODO
-                    }, label: {
-                    })
-                    .background(Color.green)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: mQuestionScreen_Option_Height, alignment: .center)
-                }
-                .background(Color.green)
+                Text("")
+                    .frame(height: mQuestionScreen_Empty_Height, alignment: .center)
             }
             .ignoresSafeArea()
         } else if (mQuestionViewModel.mScreenType == "Result") {
@@ -195,11 +159,12 @@ struct AppView: View {
                         .font(Font.custom("Baskerville-BoldItalic", size: mScreenH/17.5))
                         .frame(height: mResultScreen_Result_Height, alignment: .center)
                 }
-                Text("\(mQuestionViewModel.wrongOrRightPoints()) \(mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].Points)")
+                Text("\(mQuestionViewModel.wrongOrRightPoints())\(mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].Points)")
                     .foregroundColor(mQuestionViewModel.mQuestionScreen_Result_Font_Color )
-                    .font(.largeTitle)
-                    .bold()
+                    .font(.system(size: mScreenH/12))
                     .frame(height: mResultScreen_Points_Height, alignment: .center)
+                Text("")
+                    .frame(height: mResultScreen_Empty_Height, alignment: .center)
                 Button(action: {
                     mQuestionViewModel.mQuestionScreen_Question_Number = mQuestionViewModel.getRandomQuestionNumber()
                     mQuestionViewModel.mQuestionScreen_Result_Font_Color = Color.green
@@ -213,10 +178,10 @@ struct AppView: View {
                     }
                 }, label: {
                     Text("Next")
-                        .font(.largeTitle)
                         .bold()
+                        .font(.system(size: mScreenH/20))
                 })
-                .frame(height: mQuestionScreen_Result_Height, alignment: .center)
+                .frame(height: mResultScreen_Next_Button_Height, alignment: .center)
                 .accentColor(.black)
             }
         } else if (mQuestionViewModel.mScreenType == "Stats") {
