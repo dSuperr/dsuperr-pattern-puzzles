@@ -11,12 +11,14 @@ struct AppView: View {
     @State var mHomeScreen_App_Name_Height_2 = UIScreen.main.bounds.size.height/12
     @State var mHomeScreen_Empty_Height_2 = UIScreen.main.bounds.size.height/12
     @State var mHomeScreen_Play_Height = UIScreen.main.bounds.size.height*2/12
-    @State var mHomeScreen_Empty_Height_3 = UIScreen.main.bounds.size.height*3/12    
-    @State var mQuestionScreen_Score_Height = UIScreen.main.bounds.size.height*2/16
+    @State var mHomeScreen_Empty_Height_3 = UIScreen.main.bounds.size.height*3/12
+    @State var mQuestionScreen_Empty_Height_1 = UIScreen.main.bounds.size.height*1/16
+    @State var mQuestionScreen_Score_Height = UIScreen.main.bounds.size.height*1/16
     @State var mQuestionScreen_Question_Points_Height = UIScreen.main.bounds.size.height*1/16
-    @State var mQuestionScreen_Text_Height = UIScreen.main.bounds.size.height*5/16
+    @State var mQuestionScreen_Text_Height_1 = UIScreen.main.bounds.size.height*2/16
+    @State var mQuestionScreen_Text_Height_2 = UIScreen.main.bounds.size.height*1/16
     @State var mQuestionScreen_Option_Height = UIScreen.main.bounds.size.height*4/16
-    @State var mQuestionScreen_Empty_Height = UIScreen.main.bounds.size.height*1/16
+    @State var mQuestionScreen_Empty_Height_2 = UIScreen.main.bounds.size.height*1/16
     @State var mResultScreen_Result_Height = UIScreen.main.bounds.size.height*3/12
     @State var mResultScreen_Points_Height = UIScreen.main.bounds.size.height*3/12
     @State var mResultScreen_Empty_Height = UIScreen.main.bounds.size.height*1/12
@@ -69,28 +71,31 @@ struct AppView: View {
             }
         } else if (mQuestionViewModel.mScreenType == "Question") {
             VStack {
+                Text("")
+                    .frame(width: mScreenW, height: mQuestionScreen_Empty_Height_1, alignment: .center)
+                    .background(Color.green)
                 Text("Score: \(mQuestionViewModel.mQuestionScreen_Score)")
                     .bold()
                     .font(.title)
                     .foregroundColor(.white)
                     .frame(width: mScreenW, height: mQuestionScreen_Score_Height)
                     .background(Color.green)
-                    .padding(.top, mQuestionScreen_Score_Height/4)
                 Text("\(mQuestionViewModel.getQuestionToughness())")
                     .font(Font.custom("AmericanTypewriter", size: mQuestionScreen_Question_Points_Height/3))
                     .frame(height: mQuestionScreen_Question_Points_Height)
-                Text(mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].Question)
-                    .bold()
-                    .font(.largeTitle)
-                    .frame(height: mQuestionScreen_Text_Height)
+                Text(mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].QuestionLine1)
+                    .font(.title)
+                    .frame(height: mQuestionScreen_Text_Height_1)
+                Text(mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].QuestionLine2)
+                    .font(Font.system(size: mQuestionScreen_Text_Height_2/1.75))
+                    .frame(height: mQuestionScreen_Text_Height_2)
                 HStack {
                     Button(action: {
                         mQuestionViewModel.checkAnswerAndUpdateScore(aOption_Number: 1)
                     }, label: {
                         Text(mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].Option1)
                             .foregroundColor(.black)
-                            .bold()
-                            .font(.title)
+                            .font(Font.system(size: mQuestionScreen_Text_Height_2/1.75))
                     })
                     .frame(maxWidth: .infinity)
                     .frame(height: mQuestionScreen_Option_Height, alignment: .center)
@@ -99,8 +104,7 @@ struct AppView: View {
                     }, label: {
                         Text(mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].Option2)
                             .foregroundColor(.black)
-                            .bold()
-                            .font(.title)
+                            .font(Font.system(size: mQuestionScreen_Text_Height_2/1.75))
                     })
                     .frame(maxWidth: .infinity)
                     .frame(height: mQuestionScreen_Option_Height, alignment: .center)
@@ -112,8 +116,7 @@ struct AppView: View {
                     }, label: {
                         Text(mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].Option3)
                             .foregroundColor(.black)
-                            .bold()
-                            .font(.title)
+                            .font(Font.system(size: mQuestionScreen_Text_Height_2/1.75))
                     })
                     .frame(maxWidth: .infinity)
                     .frame(height: mQuestionScreen_Option_Height, alignment: .center)
@@ -122,15 +125,14 @@ struct AppView: View {
                     }, label: {
                         Text(mQuestionViewModel.mQuestionModel[mQuestionViewModel.mQuestionScreen_Question_Number].Option4)
                             .foregroundColor(.black)
-                            .bold()
-                            .font(.title)
+                            .font(Font.system(size: mQuestionScreen_Text_Height_2/1.75))
                     })
                     .frame(maxWidth: .infinity)
                     .frame(height: mQuestionScreen_Option_Height, alignment: .center)
                 }
                 .frame(height: mQuestionScreen_Option_Height)
                 Text("")
-                    .frame(height: mQuestionScreen_Empty_Height, alignment: .center)
+                    .frame(height: mQuestionScreen_Empty_Height_2, alignment: .center)
             }
             .ignoresSafeArea()
         } else if (mQuestionViewModel.mScreenType == "Result") {
